@@ -44,7 +44,7 @@ in
     htop ranger zathura xclip tree
 
     # applications
-    firefox spotify-4k slack anki kitty syncthing zoom-us discord mendeley obsidian syncthing imagej epiphany falkon libreoffice
+    firefox spotify-4k slack anki kitty syncthing zoom-us discord mendeley obsidian syncthing imagej epiphany falkon libreoffice-qt qutebrowser gnome3.gnome-keyring
   ];
 
   home.sessionVariables = {

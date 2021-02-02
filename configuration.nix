@@ -35,6 +35,8 @@
       EDITOR = "vi";
       GDK_SCALE = "2";
       GDK_DPI_SCALE = "0.5";
+      #QT_SCALE_FACTOR = "2";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
     };
 
@@ -52,6 +54,8 @@
   # user to the "video" group as well.
   programs.light.enable = true;
 
+  programs.seahorse.enable = true;
+
   powerManagement = {
     # run powertop --auto-tune on startup
     powertop.enable = true;
@@ -61,6 +65,9 @@
   services = {
     # automatically change xrandr profiles on display change
     autorandr.enable = true;
+
+    # keyring
+    gnome3.gnome-keyring.enable = true;
 
     # bluetooth control
     blueman.enable = true;
