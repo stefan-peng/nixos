@@ -5,14 +5,16 @@ A surprisingly small number of files can specify an entire NixOS system. These d
 ## Sync a new system 
 
 ```sh
+nix-shell -p git
+
 # Go to the home directory and clone into .dotfiles
-cd ~ && git clone git@github.com:stefan-peng/.dotfiles.git && cd .dotfiles
+cd ~ && git clone git@github.com:stefan-peng/nixos.git .dotfiles && cd .dotfiles
 
 # Sync these files to the system
-./scripts/set-updates.sh
+sudo ./scripts/set-updates.sh
 
 # Install the new NixOS system
-nixos-rebuild switch
+sudo nixos-rebuild switch
 
 # Install `home-manager`
 
