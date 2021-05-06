@@ -6,8 +6,6 @@
       ./hardware-configuration.nix
     ];
   
-  hardware.video.hidpi.enable = true;
-
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
