@@ -44,7 +44,7 @@ in
     htop ranger zathura xclip tree
 
     # applications
-    firefox spotify-4k slack anki kitty syncthing zoom-us discord mendeley obsidian syncthing imagej epiphany falkon libreoffice-qt qutebrowser gnome3.gnome-keyring
+    firefox spotify-4k slack anki kitty syncthing discord mendeley obsidian epiphany libreoffice-qt qutebrowser gnome3.gnome-keyring
   ];
 
   home.sessionVariables = {
@@ -299,6 +299,10 @@ in
     enable = true;
     latitude = "42.0308";
     longitude = "-93.6319";
+  };
+
+  services.syncthing = {
+    enable = true;
   };
 
   services.polybar = {
