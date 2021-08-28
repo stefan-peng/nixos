@@ -44,12 +44,12 @@ in
     htop ranger zathura xclip tree
 
     # applications
-    firefox spotify-4k slack anki kitty syncthing discord mendeley obsidian epiphany libreoffice-qt qutebrowser gnome3.gnome-keyring
+    firefox spotify slack anki kitty syncthing discord mendeley obsidian epiphany libreoffice-qt qutebrowser gnome3.gnome-keyring
   ];
 
   home.sessionVariables = {
     #GDK_CORE_DEVICE_EVENTS = "";
-    XCURSOR_SIZE = "32";
+    XCURSOR_SIZE = "16";
     MOZ_USE_XINPUT2 = 1;
   };
 
@@ -66,7 +66,7 @@ in
   programs.git = {
     enable = true;
     userName = "Stefan Peng";
-    userEmail = "stefanpeng9@gmail.com";
+    userEmail = "sp8@fastmail.com";
     extraConfig = {
       core.editor = "vim";
       github.username = "stefan-peng";
@@ -188,7 +188,7 @@ in
 
   # kitty
   xdg.configFile."kitty/kitty.conf".text = ''
-    font_size 20.0
+    font_size 14.0
 
     # https://github.com/arcticicestudio/nord-termite/
     cursor #d8dee9
@@ -297,8 +297,8 @@ in
 
   services.redshift = {
     enable = true;
-    latitude = "42.0308";
-    longitude = "-93.6319";
+    latitude = "39.1732";
+   longitude = "-77.2717";
   };
 
   services.syncthing = {
@@ -324,8 +324,8 @@ in
       magenta = "#B48EAD";
       background = "#802E3440";
 
-      overpass = "Overpass Mono:pixelsize=9;2";
-      monofur = "Monofur Nerd Font:pixelsize=9;2";
+      overpass = "Overpass Mono:pixelsize=14;2";
+      monofur = "Monofur Nerd Font:pixelsize=14;2";
     in
     # inspired by /ossix/dotfiles/dark-forest
     ''
@@ -342,11 +342,11 @@ in
     #
 
     [bar/top]
-    dpi = 192
+    dpi = 96
     radius = 0.0
     fixed-center = true
     bottom = false
-    height = 40
+    height = 20
     padding-left = 3
     padding-right = 4
     background = ${background}
@@ -357,17 +357,18 @@ in
     border-color = ${gray}
     separator = " "
 
-    font-0 = "TerminessTTF Nerd Font:size=9;2"
-    font-1 = Font Awesome 5 Free:style=Regular:pixelsize=9;2
-    font-2 = Font Awesome 5 Free:style=Solid:pixelsize=9;2
-    font-3 = Font Awesome 5 Brands:pixelsize=9;2
-    font-4 = "TerminessTTF Nerd Font:style=Bold:size=9;2"
-    font-5 = FontAwesome:size=8;2
-    font-6 = fontawesome:size=9;2
+      font-0 = "TerminessTTF Nerd Font:size=12;2"
+    font-1 = Font Awesome 5 Free:style=Regular:pixelsize=12;2
+    font-2 = Font Awesome 5 Free:style=Solid:pixelsize=12;2
+    font-3 = Font Awesome 5 Brands:pixelsize=12;2
+    font-4 = "TerminessTTF Nerd Font:style=Bold:size=12;2"
+    font-5 = FontAwesome:size=12;2
+    font-6 = fontawesome:size=12;2
 
     enable-ipc = true
 
-    modules-right = cpu memory battery0 battery1 volume
+    #modules-right = cpu memory battery0 battery1 volume
+    modules-right = cpu memory volume
     modules-center = date
     modules-left = i3 xwindow
 

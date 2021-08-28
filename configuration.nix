@@ -27,15 +27,15 @@
     defaultLocale = "en_US.UTF-8";
   };
 
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/New_York";
   environment = {
     variables = {
       EDITOR = "vi";
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "0.5";
+      #GDK_SCALE = "2";
+      #GDK_DPI_SCALE = "0.5";
       #QT_SCALE_FACTOR = "2";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
     };
 
     # List packages installed in system profile.
@@ -50,14 +50,14 @@
 
   # Wrapper for backlight. Must enable hardware.brightness.ctl and add
   # user to the "video" group as well.
-  programs.light.enable = true;
+  #programs.light.enable = true;
 
   programs.seahorse.enable = true;
 
-  powerManagement = {
-    # run powertop --auto-tune on startup
-    powertop.enable = true;
-  };
+  #powerManagement = {
+  #  # run powertop --auto-tune on startup
+  #  powertop.enable = true;
+  #};
 
   # List services that you want to enable:
   services = {
@@ -65,10 +65,10 @@
     autorandr.enable = true;
 
     # keyring
-    gnome3.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = true;
 
     # bluetooth control
-    blueman.enable = true;
+    #blueman.enable = true;
 
     # monitor and manage CPU temp, throttling as needed
     thermald.enable = true;
@@ -95,11 +95,11 @@
       '';
       enable = true;
       autorun = true;
-      dpi = 192;
+      # dpi = 192;
 
       # support external monitors via DisplayPort in addition to the
       # default screen eDP (use `xrandr` to list)
-      xrandrHeads = [ "eDP-1" "DisplayPort-0" ];
+      # xrandrHeads = [ "eDP-1" "DisplayPort-0" ];
 
       desktopManager = {
         xterm.enable = false;
@@ -116,15 +116,15 @@
       };
 
       # Enable touchpad support
-      libinput = {
-        enable = true;
-        naturalScrolling = true;
-      };
+      #libinput = {
+      #  enable = true;
+      #  touchpad.naturalScrolling = true;
+      #};
     };
   };
 
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     enableGhostscriptFonts = true;
 
     fontconfig = {
@@ -158,7 +158,7 @@
       package = pkgs.pulseaudioFull;
     };
 
-    bluetooth.enable = true;
+    #bluetooth.enable = true;
   };
 
   # Define a user account.
@@ -179,5 +179,6 @@
   };
 
   # don't change this
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }
+
