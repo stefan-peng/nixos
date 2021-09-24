@@ -41,7 +41,7 @@
     # List packages installed in system profile.
     systemPackages = with pkgs; [
       # basic
-      wget lsof vim
+      wget lsof vim firefox
 
       # services
       light powertop networkmanagerapplet
@@ -162,7 +162,7 @@
   };
 
   # Define a user account.
-  users.extraUsers.stefan = {
+  users.extraUsers.speng = {
     isNormalUser = true;
     group = "users";
     extraGroups = [ "wheel" "networkmanager" "video" ];

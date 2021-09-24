@@ -35,16 +35,37 @@ in
     xorg.xkbcomp
 
     # sway
-    swaylock
-    swayidle
-    wl-clipboard
-    mako
+    # swaylock
+    # swayidle
+    # wl-clipboard
+    # mako
 
     # command line
-    htop ranger zathura xclip tree
+    htop
+    ranger
+    zathura
+    xclip
+    tree
+    youtube-dl
 
     # applications
-    firefox spotify slack anki kitty syncthing discord mendeley obsidian epiphany libreoffice-qt qutebrowser gnome3.gnome-keyring
+    arandr
+    firefox
+    spotify
+    slack
+    anki
+    kitty
+    syncthing
+    discord
+    mendeley
+    obsidian
+    epiphany
+    libreoffice-qt
+    qutebrowser
+    gnome3.gnome-keyring
+    bitwarden
+    mpv
+    pavucontrol
   ];
 
   home.sessionVariables = {
@@ -188,7 +209,7 @@ in
 
   # kitty
   xdg.configFile."kitty/kitty.conf".text = ''
-    font_size 14.0
+    font_size 12.0
 
     # https://github.com/arcticicestudio/nord-termite/
     cursor #d8dee9
@@ -293,7 +314,7 @@ in
     };
   };
 
-  services.blueman-applet.enable = true;
+  # services.blueman-applet.enable = true;
 
   services.redshift = {
     enable = true;
@@ -608,9 +629,11 @@ in
           "${modifier}+Return" = "exec kitty";
           "${modifier}+BackSpace" = "kill";
           "${modifier}+f" = "fullscreen toggle";
-          "${modifier}+backslash" = "exec env -uGDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
+          #"${modifier}+backslash" = "exec env -uGDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
+          "${modifier}+backslash" = "exec qutebrowser";
           "${modifier}+x" = "exec i3lock";
 
+          # TODO: fix multiple sinks
           "XF86AudioRaiseVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume 0 +5%";
           "XF86AudioLowerVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume 0 -5%";
           "XF86AudioMute" = "exec ${pulseaudio}/bin/pactl set-sink-mute 0 toggle";
@@ -639,6 +662,10 @@ in
             always = true;
             notification = false;
           }
+          { command = "xrandr --output HDMI1 --mode 1920x1080 --rate 75";
+            always = true;
+            notification = false;
+          }
         ];
 
       };
@@ -650,8 +677,8 @@ in
     };
   };
 
-  wayland.windowManager.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true ;
-  };
+  # wayland.windowManager.sway = {
+  #   enable = true;
+  #   wrapperFeatures.gtk = true ;
+  # };
 }
