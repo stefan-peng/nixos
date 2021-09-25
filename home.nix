@@ -33,6 +33,7 @@ in
     # i3
     dmenu
     xorg.xkbcomp
+    rofi
 
     # sway
     # swaylock
@@ -47,6 +48,9 @@ in
     xclip
     tree
     youtube-dl
+    mpv
+    fzf
+    streamlink
 
     # applications
     arandr
@@ -66,6 +70,8 @@ in
     bitwarden
     mpv
     pavucontrol
+    hakuneko
+    nyxt
   ];
 
   home.sessionVariables = {
@@ -326,6 +332,50 @@ in
     enable = true;
   };
 
+  services.unclutter = {
+    enable = true;
+  };
+
+  services.picom = {
+    enable = true;
+    activeOpacity = "0.90";
+    blur = true;
+    blurExclude = [
+      "class_g = 'slop'"
+    ];
+    extraOptions = ''
+      corner-radius = 10;
+      blur-method = "dual_kawase";
+      blur-strength = "10";
+      xinerama-shadow-crop = true;
+    '';
+    experimentalBackends = true;
+
+    shadowExclude = [
+      "bounding_shaped && !rounded_corners"
+    ];
+
+    fade = true;
+    fadeDelta = 5;
+    vSync = true;
+    opacityRule = [
+      "100:class_g   *?= 'Chromium-browser'"
+      "100:class_g   *?= 'Firefox'"
+      "100:class_g   *?= 'gitkraken'"
+      "100:class_g   *?= 'emacs'"
+      "100:class_g   ~=  'jetbrains'"
+      "100:class_g   *?= 'slack'"
+    ];
+    package = pkgs.picom.overrideAttrs(o: {
+      src = pkgs.fetchFromGitHub {
+        repo = "picom";
+        owner = "ibhagwan";
+        rev = "44b4970f70d6b23759a61a2b94d9bfb4351b41b1";
+        sha256 = "0iff4bwpc00xbjad0m000midslgx12aihs33mdvfckr75r114ylh";
+      };
+    });
+  };
+
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -378,7 +428,7 @@ in
     border-color = ${gray}
     separator = " "
 
-      font-0 = "TerminessTTF Nerd Font:size=12;2"
+    font-0 = "TerminessTTF Nerd Font:size=12;2"
     font-1 = Font Awesome 5 Free:style=Regular:pixelsize=12;2
     font-2 = Font Awesome 5 Free:style=Solid:pixelsize=12;2
     font-3 = Font Awesome 5 Brands:pixelsize=12;2
@@ -388,8 +438,8 @@ in
 
     enable-ipc = true
 
-    #modules-right = cpu memory battery0 battery1 volume
-    modules-right = cpu memory volume
+    #modules-right = cpu memory battery0 battery1 pulseaudio
+    modules-right = cpu memory pulseaudio
     modules-center = date
     modules-left = i3 xwindow
 
@@ -515,10 +565,12 @@ in
     ramp-capacity-2-foreground = ${yellow}
     ramp-capacity-foreground = ${white}
 
-
-    [module/volume]
+    [module/pulseaudio]
     type = internal/pulseaudio
-    format-volume = <ramp-volume><label-volume>
+    sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+    use-ui-max = false
+
+    format-volume = <ramp-volume> <label-volume>
     label-volume = %percentage:3%%
     label-volume-foreground = ${white}
 
@@ -539,7 +591,7 @@ in
     [module/date]
     type = internal/date
     date-alt = "%a - %m/%d"
-    date = "%{T5}%I:%M%{T-}"
+    date = "%H:%M"
     interval = 1
     format-padding = 1
     format-background = ${gray}
@@ -629,14 +681,14 @@ in
           "${modifier}+Return" = "exec kitty";
           "${modifier}+BackSpace" = "kill";
           "${modifier}+f" = "fullscreen toggle";
-          #"${modifier}+backslash" = "exec env -uGDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
-          "${modifier}+backslash" = "exec qutebrowser";
+          "${modifier}+backslash" = "exec env -uGDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
+          #"${modifier}+backslash" = "exec qutebrowser";
           "${modifier}+x" = "exec i3lock";
 
           # TODO: fix multiple sinks
-          "XF86AudioRaiseVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume 0 +5%";
-          "XF86AudioLowerVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume 0 -5%";
-          "XF86AudioMute" = "exec ${pulseaudio}/bin/pactl set-sink-mute 0 toggle";
+          "XF86AudioRaiseVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
+          "XF86AudioLowerVolume" = "exec ${pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+          "XF86AudioMute" = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
           "XF86AudioMicMute" = "exec ${pulseaudio}/bin/pactl set-source-mute 1 toggle";
 
 

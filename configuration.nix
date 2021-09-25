@@ -67,6 +67,9 @@
     # keyring
     gnome.gnome-keyring.enable = true;
 
+    # onedrive
+    onedrive.enable = true;
+
     # bluetooth control
     #blueman.enable = true;
 
