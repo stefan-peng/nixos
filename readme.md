@@ -11,7 +11,7 @@ nix-shell -p git
 cd ~ && git clone git@github.com:stefan-peng/nixos.git .dotfiles && cd .dotfiles
 
 # Sync these files to the system
-sudo ./scripts/set-updates.sh
+./scripts/set-updates.sh
 
 # Install the new NixOS system
 sudo nixos-rebuild switch
