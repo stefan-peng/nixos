@@ -55,6 +55,7 @@ in
     # applications
     arandr
     firefox
+    google-chrome
     spotify
     slack
     anki
@@ -360,6 +361,7 @@ in
     vSync = true;
     opacityRule = [
       "100:class_g   *?= 'Chromium-browser'"
+      "100:class_g   *?= 'google-chrome'"
       "100:class_g   *?= 'Firefox'"
       "100:class_g   *?= 'gitkraken'"
       "100:class_g   *?= 'emacs'"
@@ -681,8 +683,9 @@ in
           "${modifier}+Return" = "exec kitty";
           "${modifier}+BackSpace" = "kill";
           "${modifier}+f" = "fullscreen toggle";
-          "${modifier}+backslash" = "exec env -uGDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
+          #"${modifier}+backslash" = "exec env -u GDK_CORE_DEVICE_EVENTS MOZ_USE_XINPUT2=1 firefox";
           #"${modifier}+backslash" = "exec qutebrowser";
+          "${modifier}+backslash" = "exec google-chrome-stable --use-gl=desktop --enable-features=VaapiVideoDecoder";
           "${modifier}+x" = "exec i3lock";
 
           # TODO: fix multiple sinks
