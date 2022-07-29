@@ -94,7 +94,7 @@ in
   programs.git = {
     enable = true;
     userName = "Stefan Peng";
-    userEmail = "sp8@fastmail.com";
+    userEmail = "6244404+stefan-peng@users.noreply.github.com";
     extraConfig = {
       core.editor = "vim";
       github.username = "stefan-peng";
