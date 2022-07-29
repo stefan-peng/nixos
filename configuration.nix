@@ -1,3 +1,7 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, ... }:
 
 {
@@ -5,29 +9,32 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  
-  boot = {
-    # Use the systemd-boot EFI boot loader.
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
   };
 
   # Set up networking
   networking = {
     hostName = "nixos";
 
-    # Enables wireless support via networkmanager
     networkmanager = {
       enable = true;
     };
   };
 
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
-
+  # Set your time zone.
   time.timeZone = "America/New_York";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.utf8";
+
   environment = {
     variables = {
       EDITOR = "vi";
@@ -50,7 +57,7 @@
 
   # Wrapper for backlight. Must enable hardware.brightness.ctl and add
   # user to the "video" group as well.
-  #programs.light.enable = true;
+  programs.light.enable = true;
 
   programs.seahorse.enable = true;
 
@@ -67,18 +74,15 @@
     # keyring
     gnome.gnome-keyring.enable = true;
 
-    # onedrive
-    onedrive.enable = true;
-
     # bluetooth control
-    #blueman.enable = true;
+    blueman.enable = true;
 
     # monitor and manage CPU temp, throttling as needed
     thermald.enable = true;
 
     # Enable dbus + dconf to manage system dialogs
     dbus = {
-      packages = with pkgs; [ gnome3.dconf ];
+      packages = with pkgs; [ dconf ];
     };
 
     # Remap what happens on power key press so it suspends rather than
@@ -117,6 +121,9 @@
       windowManager = {
         i3.enable = true;
       };
+
+      layout = "us";
+      xkbVariant = "";
 
       # Enable touchpad support
       #libinput = {
@@ -164,13 +171,12 @@
     #bluetooth.enable = true;
   };
 
-  # Define a user account.
-  users.extraUsers.speng = {
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.stefanp = {
     isNormalUser = true;
-    group = "users";
-    extraGroups = [ "wheel" "networkmanager" "video" ];
-    createHome = true;
-    uid = 1000;
+    description = "Stefan Peng";
+    extraGroups = [ "networkmanager" "wheel" "video" ];
+    packages = with pkgs; [];
   };
 
   # Allow unfree packages system-wide. To allow access to unfree packages
@@ -182,6 +188,6 @@
   };
 
   # don't change this
-  system.stateVersion = "21.05";
+  system.stateVersion = "22.05";
 }
 

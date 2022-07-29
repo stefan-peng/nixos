@@ -255,10 +255,10 @@ in
     # nixpkgs as of 2020-01-01
     extensions = with pkgs.vscode-extensions; [
       # Nix language support
-      bbenoist.Nix
+      #bbenoist.Nix
 
       # Vim bindings
-      vscodevim.vim
+      #vscodevim.vim
     ]
 
     # To fetch the SHA256, use `nix-prefetch-url` with this template:
